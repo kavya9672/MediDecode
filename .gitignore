@@ -1,0 +1,37 @@
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local cache and build artifacts
+.cache/
+backend/uploads/
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment variables and secret files
+.env
+.env.*
+*.envrc
+*.env.example
+
+# Generated PDFs (exclude source/reference PDFs if they belong to the repo)
+*.pdf
+
+# Log and temporary files
+*.log
+*~
+*.tmp
+*.swp
+
+# Pytest / coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node / frontend dependencies
+node_modules/
+
+# Temporary inspection scripts
+temp_inspect_paddleocr.py
+tmp_inspect_bg.py

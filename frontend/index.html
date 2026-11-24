@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediDecode – Smart Healthcare Dashboard</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Sidebar Toggle for Mobile (CSS-only) -->
+  <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle-checkbox" aria-label="Toggle navigation menu" />
+
+  <div class="dashboard-container">
+    <!-- Overlay for mobile drawer -->
+    <label for="sidebar-toggle" class="sidebar-backdrop"></label>
+
+    <!-- Sidebar Navigation matching Blueprint -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-icon-wrapper">
+            <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              <path d="M12 7v6"/>
+              <path d="M9 10h6"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">MediDecode</span>
+            <span class="brand-tagline">Healthcare AI</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- 1. Overview -->
+        <a href="#overview" class="nav-link" data-page="overview">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="7" height="9" x="3" y="3" rx="1"/>
+            <rect width="7" height="5" x="14" y="3" rx="1"/>
+            <rect width="7" height="9" x="14" y="12" rx="1"/>
+            <rect width="7" height="5" x="3" y="16" rx="1"/>
+          </svg>
+          <span>Overview</span>
+        </a>
+
+        <!-- 2. My Prescriptions -->
+        <a href="#prescriptions" class="nav-link" data-page="prescriptions">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          <span>My Prescriptions</span>
+        </a>
+
+        <!-- 3. Prescription Decoder (Default View) -->
+        <a href="#decoder" class="nav-link active" data-page="decoder">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+            <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+            <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+            <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+            <circle cx="12" cy="12" r="3"/>
+            <path d="m16 16-1.5-1.5"/>
+          </svg>
+          <span>Prescription Decoder</span>
+          <span class="nav-active-dot"></span>
+        </a>
+
+        <!-- 4. Generic Price Finder -->
+        <a href="#generic-finder" class="nav-link" data-page="generic-finder">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"/>
+            <circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          <span>Generic Price Finder</span>
+        </a>
+
+        <!-- 5. Interaction Checker -->
+        <a href="#interaction-checker" class="nav-link" data-page="interaction-checker">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span>Interaction Checker</span>
+        </a>
+
+        <!-- 6. Dosage Schedule -->
+        <a href="#dosage-schedule" class="nav-link" data-page="dosage-schedule">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <span>Dosage Schedule</span>
+        </a>
+
+        <!-- 7. Saved Reports -->
+        <a href="#saved-reports" class="nav-link" data-page="saved-reports">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <line x1="9" y1="15" x2="15" y2="15"/>
+          </svg>
+          <span>Saved Reports</span>
+        </a>
+
+        <!-- 8. About / Help -->
+        <a href="#about" class="nav-link" data-page="about">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <span>About / Help</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="priority-badge">
+          <span class="heart-pulse">❤️</span>
+          <span class="priority-text">Your Health, Our Priority</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Viewport -->
+    <div class="main-viewport">
+      <!-- Top Navigation Header matching Blueprint -->
+      <header class="app-header">
+        <div class="header-left">
+          <label for="sidebar-toggle" class="sidebar-toggle-btn" aria-label="Toggle navigation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </label>
+
+          <a href="#overview" class="back-nav-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            <span>Back</span>
+          </a>
+
+          <div class="header-titles">
+            <h1>MediDecode – Prescription Decoder</h1>
+            <p class="header-subtitle">Upload a clear image of your prescription</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="quick-status-chip">
+            <span class="status-pulse-dot"></span>
+            <span>AI Ready</span>
+          </div>
+
+          <button class="topbar-icon-btn" aria-label="Notifications" title="Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <span class="notification-badge-dot"></span>
+          </button>
+
+          <div class="user-avatar-chip" title="User profile">
+            <span>K</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Application Sections -->
+      <main>
+        <!-- ================================================================
+             1. Overview Page
+             ================================================================ -->
+        <div id="page-overview" class="app-page">
+          <section class="card">
+            <div class="section-title-wrap">
+              <h2>Hello, Health Seeker! 👋</h2>
+              <span class="card-tag">System Ready</span>
+            </div>
+            <p class="section-instruction">Take control of your health, one scan at a time. MediDecode digitizes prescriptions, verifies medications, checks pairwise clinical drug interactions, and finds affordable bioequivalent generic alternatives.</p>
+            
+            <div class="overview-quick-start">
+              <a href="#decoder" class="primary-btn nav-action-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                  <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+                  <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+                  <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+                  <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="m16 16-1.5-1.5"/>
+                </svg>
+                <span>Start Decoding a Prescription &rarr;</span>
+              </a>
+            </div>
+          </section>
+
+          <!-- Quick Actions Grid matching Blueprint -->
+          <div class="overview-grid">
+            <div class="card overview-action-card">
+              <div class="action-card-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+              </div>
+              <h3>Scan Prescription</h3>
+              <p>Upload a doctor's handwritten or printed prescription to extract medicine names, dosages, frequencies and timings.</p>
+              <a href="#decoder" class="card-action-link">Open Decoder &rarr;</a>
+            </div>
+
+            <div class="card overview-action-card">
+              <div class="action-card-icon-wrap warning-tint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+              </div>
+              <h3>Check Interactions</h3>
+              <p>Evaluate clinical drug-drug interactions across extracted medications to avoid adverse pharmacological combinations.</p>
+              <a href="#interaction-checker" class="card-action-link">Check Interactions &rarr;</a>
+            </div>
+
+            <div class="card overview-action-card">
+              <div class="action-card-icon-wrap success-tint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                  <circle cx="9" cy="21" r="1"/>
+                  <circle cx="20" cy="21" r="1"/>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                </svg>
+              </div>
+              <h3>Generic Alternatives</h3>
+              <p>Compare verified generic substitutes matching exact active salts and strengths to significantly reduce medication expenses.</p>
+              <a href="#generic-finder" class="card-action-link">Find Generics &rarr;</a>
+            </div>
+
+            <div class="card overview-action-card">
+              <div class="action-card-icon-wrap primary-tint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+              </div>
+              <h3>Dosage Timetable</h3>
+              <p>Generate and download printable PDF medication schedules formatted for morning, afternoon, evening and bedtime doses.</p>
+              <a href="#dosage-schedule" class="card-action-link">View Schedule &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             2. My Prescriptions Page
+             ================================================================ -->
+        <div id="page-prescriptions" class="app-page">
+          <section class="card">
+            <div class="section-title-wrap">
+              <h2>My Prescriptions</h2>
+              <span class="card-tag">Records</span>
+            </div>
+            <p class="section-instruction">Prescriptions processed during your active session are retained here.</p>
+
+            <div id="prescriptions-list-container">
+              <div class="empty-state-box">
+                <div class="empty-state-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="48" height="48">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <polyline points="10 9 9 9 8 9"/>
+                  </svg>
+                </div>
+                <h3>No Prescriptions in Current Session</h3>
+                <p>Upload a new prescription in the Prescription Decoder to extract medication details, verify doses, and manage your schedule.</p>
+                <a href="#decoder" class="primary-btn nav-action-btn">
+                  <span>Decode New Prescription &rarr;</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ================================================================
+             3. Prescription Decoder Page (Original Functional Workflow)
+             ================================================================ -->
+        <div id="page-decoder" class="app-page active-page">
+          <!-- 1. Image upload / camera capture -->
+          <section id="upload-section" class="card">
+            <div class="section-title-wrap">
+              <h2>Upload Prescription</h2>
+              <span class="card-tag">OCR Scanner</span>
+            </div>
+            <p class="section-instruction">Select or drop a high-resolution prescription photo to detect medicines automatically.</p>
+            
+            <div class="upload-dropzone">
+              <div class="dropzone-icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28">
+                  <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
+                  <path d="M12 12v9"/>
+                  <path d="m16 16-4-4-4 4"/>
+                </svg>
+              </div>
+              <p class="dropzone-prompt">Drag &amp; drop your prescription here or</p>
+              <input type="file" id="file-input" accept="image/jpeg,image/png" capture="environment" />
+              <p class="dropzone-limits">JPG, PNG, HEIC &bull; Max 5MB</p>
+            </div>
+
+            <div id="preview-container" class="hidden">
+              <div class="preview-wrapper">
+                <img id="preview-image" alt="Prescription preview" />
+                <div class="preview-actions">
+                  <button id="remove-image" class="small-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                      <polyline points="3 6 5 6 21 6"/>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                    <span>Remove / Replace</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. Processing status -->
+          <section id="status-section" class="card hidden">
+            <div class="section-title-wrap">
+              <h2>Processing</h2>
+              <span class="card-tag processing-tag">In Progress</span>
+            </div>
+            <div class="status-content-wrapper">
+              <div class="status-scanner-pulse">
+                <div class="scanner-circle"></div>
+              </div>
+              <p id="status-message">Uploading…</p>
+            </div>
+          </section>
+
+          <!-- 3. Extracted data -->
+          <section id="data-section" class="card hidden">
+            <div class="section-title-wrap">
+              <h2>Extracted Medicines</h2>
+              <span class="confidence-badge">Confidence 95%</span>
+            </div>
+            <p class="note">Edit any fields that are incorrect before confirming.</p>
+            <div class="table-responsive-container">
+              <table id="medicines-table">
+                <thead>
+                  <tr>
+                    <th>Brand Name</th>
+                    <th>Strength</th>
+                    <th>Dosage</th>
+                    <th>Frequency</th>
+                    <th>Duration</th>
+                    <th>Timing</th>
+                    <th>Confidence</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="action-footer">
+              <button id="confirm-button" class="primary-btn">
+                <span>Confirm &amp; Continue</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </section>
+
+          <!-- 4. Interaction / Generic comparison -->
+          <section id="analysis-section" class="card hidden">
+            <div class="section-title-wrap">
+              <h2>Safety Analysis</h2>
+              <span class="card-tag analysis-tag">Clinical Review</span>
+            </div>
+            <p class="section-instruction">Verify safe drug combinations and explore cost-saving verified generic substitutes.</p>
+            
+            <div class="analysis-btn-group">
+              <button id="analyze-button" class="primary-btn check-interactions-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span>Check Interactions</span>
+              </button>
+              <button id="compare-button" class="primary-btn find-generics-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <circle cx="8" cy="18" r="4"/>
+                  <path d="M12 18V2"/>
+                  <path d="m17 7 4 4-4 4"/>
+                </svg>
+                <span>Find Generic Alternatives</span>
+              </button>
+            </div>
+
+            <div id="analysis-output"></div>
+          </section>
+
+          <!-- 5. PDF generation -->
+          <section id="pdf-section" class="card hidden">
+            <div class="section-title-wrap">
+              <h2>Download Timetable</h2>
+              <span class="card-tag pdf-tag">Daily Schedule</span>
+            </div>
+            <p class="section-instruction">Generate a clear, printable daily dosage timetable with morning, afternoon, evening and night administration instructions.</p>
+            <div class="action-footer">
+              <button id="download-pdf" class="primary-btn download-pdf-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span>Download PDF</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Medical Disclaimer -->
+          <section id="disclaimer" class="card">
+            <div class="disclaimer-inner">
+              <div class="disclaimer-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+              </div>
+              <p class="disclaimer-text">
+                <strong>Disclaimer:</strong> This tool provides informational assistance only. It does not replace professional medical advice. Verify all medication details with a qualified healthcare professional before use.
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <!-- ================================================================
+             4. Generic Price Finder Page
+             ================================================================ -->
+        <div id="page-generic-finder" class="app-page">
+          <section class="card">
+            <div class="section-title-wrap">
+              <h2>Generic Price Finder</h2>
+              <span class="card-tag">Price Comparison</span>
+            </div>
+            <p class="section-instruction">Discover verified bioequivalent generic substitutes matching active pharmaceutical ingredients.</p>
+
+            <div id="generic-finder-content">
+              <div class="empty-state-box">
+                <div class="empty-state-icon success-tint">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="48" height="48">
+                    <circle cx="9" cy="21" r="1"/>
+                    <circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                  </svg>
+                </div>
+                <h3>No Medicines Loaded for Generic Comparison</h3>
+                <p>The Generic Price Finder analyzes medications from your prescription. Decode a prescription first, then review affordable generic options with identical active salts and strengths.</p>
+                <a href="#decoder" class="primary-btn nav-action-btn">
+                  <span>Decode a Prescription &rarr;</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ================================================================
+             5. Interaction Checker Page
+             ================================================================ -->
+        <div id="page-interaction-checker" class="app-page">
+          <section class="card">
+            <div class="section-title-wrap">
+              <h2>Drug Interaction Checker</h2>
+              <span class="card-tag analysis-tag">Clinical Safety</span>
+            </div>
+            <p class="section-instruction">Screen for pairwise contraindications, reduced drug efficacy, and combined adverse risks.</p>
+
+            <div id="interaction-checker-content">
+              <div class="empty-state-box">
+                <div class="empty-state-icon warning-tint">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="48" height="48">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                </div>
+                <h3>No Medications to Screen</h3>
+                <p>Drug interaction checks require verified medications from your prescription. Scan or upload a prescription to analyze drug-drug interactions with our verified clinical engine.</p>
+                <a href="#decoder" class="primary-btn nav-action-btn">
+                  <span>Scan Prescription &rarr;</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ================================================================
+             6. Dosage Schedule Page
+             ================================================================ -->
+        <div id="page-dosage-schedule" class="app-page">
+          <section class="card">
+            <div class="section-title-wrap">
+              <h2>Daily Dosage Schedule</h2>
+              <span class="card-tag pdf-tag">Adherence</span>
+            </div>
+            <p class="section-instruction">Personalized medicine administration timeline organized by morning, afternoon, evening and bedtime doses.</p>
+
+            <div id="dosage-schedule-content">
+              <div class="empty-state-box">
+                <div class="empty-state-icon primary-tint">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="48" height="48">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                </div>
+                <h3>No Schedule Generated Yet</h3>
+                <p>Once you upload and confirm a prescription in the Prescription Decoder, your daily medication timetable will be generated here for download.</p>
+                <a href="#decoder" class="primary-btn nav-action-btn">
+                  <span>Create Schedule from Prescription &rarr;</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ================================================================
+             7. Saved Reports Page
+             ================================================================ -->
+        <div id="page-saved-reports" class="app-page">
+          <section class="card">
+            <div class="section-title-wrap">
+              <h2>Saved Reports &amp; History</h2>
+              <span class="card-tag">Archived Reports</span>
+            </div>
+            <p class="section-instruction">Access your previously generated prescription analysis reports and downloadable PDF timetables.</p>
+
+            <div class="empty-state-box">
+              <div class="empty-state-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="48" height="48">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                  <polyline points="17 21 17 13 7 13 7 21"/>
+                  <polyline points="7 3 7 8 15 8"/>
+                </svg>
+              </div>
+              <h3>No Archived Reports</h3>
+              <p>Reports and timetables are generated on-demand during each session. Decode a prescription to generate and download a new PDF report.</p>
+              <a href="#decoder" class="primary-btn nav-action-btn">
+                <span>Go to Prescription Decoder &rarr;</span>
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <!-- ================================================================
+             8. About / Help Page
+             ================================================================ -->
+        <div id="page-about" class="app-page">
+          <section class="card">
+            <div class="section-title-wrap">
+              <h2>About MediDecode</h2>
+              <span class="card-tag">Healthcare AI</span>
+            </div>
+            <p class="section-instruction">Smarter Healthcare. A Healthier You.</p>
+
+            <div class="about-info-block">
+              <p>MediDecode is an intelligent healthcare utility designed to bridge the gap between handwritten prescriptions and clear, actionable patient understanding. Using dual-pass OCR and verified pharmaceutical databases, MediDecode extracts medication schedules, flags potential drug-drug interactions, and identifies affordable generic substitutes.</p>
+            </div>
+          </section>
+
+          <!-- How It Works Card matching Blueprint -->
+          <section class="card">
+            <h2>How MediDecode Works</h2>
+            <div class="steps-flow">
+              <div class="step-card">
+                <div class="step-num">1</div>
+                <h4>Image Preprocessing</h4>
+                <p>OpenCV deskewing, noise filtering, and adaptive thresholding prepare the prescription image for optical character recognition.</p>
+              </div>
+              <div class="step-card">
+                <div class="step-num">2</div>
+                <h4>Dual-Pass OCR</h4>
+                <p>PaddleOCR extracts raw text and line-level confidence scores, flagging low-confidence characters for human review.</p>
+              </div>
+              <div class="step-card">
+                <div class="step-num">3</div>
+                <h4>Database Matching</h4>
+                <p>RapidFuzz entity matching validates brand names against verified local pharmaceutical catalogs.</p>
+              </div>
+              <div class="step-card">
+                <div class="step-num">4</div>
+                <h4>Safety &amp; Savings</h4>
+                <p>NetworkX graph engine checks pairwise drug interactions and surfaces cost-effective generic alternatives.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- FAQs Card matching Blueprint -->
+          <section class="card">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+              <div class="faq-item">
+                <h4>What image formats are supported?</h4>
+                <p>You can upload JPG, JPEG, and PNG images up to 5MB. Clear, well-lit, and in-focus images yield the highest extraction accuracy.</p>
+              </div>
+              <div class="faq-item">
+                <h4>Are generic alternatives safe?</h4>
+                <p>Yes. Verified generic substitutes contain the exact same active pharmaceutical ingredient (API), strength, and dosage form as brand-name drugs.</p>
+              </div>
+              <div class="faq-item">
+                <h4>Does this replace medical advice?</h4>
+                <p>No. MediDecode provides informational assistance only. Always consult a qualified medical professional before altering any medication regimen.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
