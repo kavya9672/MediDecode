@@ -220,8 +220,32 @@
   }
 
   // --------------------------------------------------------
-  // 8. Navigation system (unchanged – omitted for brevity)
+  // 8. Navigation system (implemented)
   // --------------------------------------------------------
-  // The navigation code from the original file is retained below unchanged.
-  // ... (the rest of the original file follows unchanged) ...
+  // Basic hash-based SPA navigation to switch visible pages.
+  const pages = document.querySelectorAll('.app-page');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function showPage(pageName) {
+    // Hide all pages
+    pages.forEach(p => p.classList.add('hidden'));
+    // Show target page
+    const target = document.querySelector(`.app-page[data-page='${pageName}']`);
+    if (target) target.classList.remove('hidden');
+    // Update active nav link
+    navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === pageName));
+    // Sync side effects (e.g., header title)
+    syncContextPages();
+  }
+
+  // Handle hash changes
+  function onHashChange() {
+    const hash = window.location.hash.replace('#', '') || 'decoder'; // default to decoder page
+    showPage(hash);
+  }
+
+  window.addEventListener('hashchange', onHashChange);
+  // Initial load
+  document.addEventListener('DOMContentLoaded', onHashChange);
+
 })();
