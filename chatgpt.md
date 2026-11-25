@@ -390,3 +390,15 @@ The reference blueprint presents an 8-screen healthcare suite. In the current si
   - No automated integration test was run against a live server; manual verification is recommended after starting the FastAPI server.
 
 ---
+
+## 2026-11-25 – Connect deployed frontend & backend
+
+**Modified files**
+- `frontend/app.js` – updated `apiBase` constant to `"https://medidecode-jgk6.onrender.com"` (line 5).
+- `backend/main.py` – expanded CORS `allow_origins` to include `"https://medidecode-1.onrender.com"` while preserving existing localhost origin (line 39).
+
+**Verification**
+- Ran `node --check frontend/app.js` – syntax OK.
+- Ran `python -m py_compile backend/main.py` – syntax OK.
+- Inspected both files to confirm changes at the indicated lines.
+- No other files were altered; API routes, OCR logic, and database code remain unchanged.

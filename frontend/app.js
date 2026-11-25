@@ -2,7 +2,7 @@
 // Handles the MediDecode UI workflow: upload, processing, verification, analysis, PDF download, and SPA navigation.
 
 (() => {
-  const apiBase = "http://127.0.0.1:8000"; // backend API base URL
+  const apiBase = "https://medidecode-jgk6.onrender.com"; // backend API base URL
   const fileInput = document.getElementById("file-input");
   const previewContainer = document.getElementById("preview-container");
   const previewImage = document.getElementById("preview-image");
